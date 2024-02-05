@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+
+using Microsoft.JSInterop;
 
 namespace Damselfly.Web.Components;
 
@@ -8,6 +9,8 @@ public class CropData
     public int Left { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
+
+    
 }
 
 /// <summary>

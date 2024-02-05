@@ -278,7 +278,10 @@ public class ImageSharpProcessor : IImageProcessor, IHashProvider
 
         foreach ( var rect in rects )
         {
-            var pen = new Pen(Color.HotPink, 7);
+
+            // var pen = new Pen(Color.HotPink, 7);
+
+            Pen pen =  Pens.Solid(Color.HotPink, 7);
 
             image.Mutate(x => x.AutoOrient());
             image.Mutate(x => x.Draw(pen, rect));
@@ -303,7 +306,10 @@ public class ImageSharpProcessor : IImageProcessor, IHashProvider
         var imgSize = processingContext.GetCurrentSize();
 
         // measure the text size
-        var size = TextMeasurer.Measure(text, new TextOptions(font));
+       // var size = TextMeasurer.Measure(text, new TextOptions(font));
+
+        var size = TextMeasurer.MeasureSize(text, new TextOptions(font));
+
 
         var ratio = 4; // Landscape, we make the text 25% of the width
 
@@ -324,13 +330,25 @@ public class ImageSharpProcessor : IImageProcessor, IHashProvider
 
         // 5% from the bottom right.
         var position = new PointF(imgSize.Width - fivePercent, imgSize.Height - fivePercent);
-
+        /*
         var textOptions = new TextOptions(scaledFont)
         {
             VerticalAlignment = VerticalAlignment.Bottom,
             HorizontalAlignment = HorizontalAlignment.Right
         };
+        */
+        var textOptions = new RichTextOptions(scaledFont)
+        {
+            VerticalAlignment = VerticalAlignment.Bottom,
+            HorizontalAlignment = HorizontalAlignment.Right
+        };
 
+
+    
         return processingContext.DrawText(textOptions, text, color);
+
+
+
+
     }
 }
